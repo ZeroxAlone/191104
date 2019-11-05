@@ -31,32 +31,35 @@ def DecimalTurnIntoOtherSystem():
     NumList =[]
     VoidNum = ''
     DecimalNum = GetDecimalNum()
-    Base = N
-    Power = 0
-    Temp = Base ** Power
-    while DecimalNum > Temp:
-        Power += 1
+    if N == 10:
+        print("Result: ", DecimalNum)
+    else:
+        Base = N
+        Power = 0
         Temp = Base ** Power
-        if DecimalNum == Temp:
+        while DecimalNum > Temp:
             Power += 1
-    Power -= 1
-    while Power != -1:
-        Result = DecimalNum // (Base ** Power)
-        DecimalNum -= Base ** Power
-        if Result >= N:
-            Tmp = Result - N
-            NumList.append(Tmp)
-        elif Result >= 0:
-            NumList.append(Result)
-        elif DecimalNum < 0:
-            NumList.append(0)
+            Temp = Base ** Power
+            if DecimalNum == Temp:
+                Power += 1
         Power -= 1
-    for i in range(len(NumList)):
-        if NumList[i] >= 10:
-            LetterNum = NumList[i] + 55
-            NumList[i] = chr(LetterNum)
-        VoidNum += str(NumList[i])
-    print("Result: ", VoidNum)
+        while Power != -1:
+            Result = DecimalNum // (Base ** Power)
+            DecimalNum -= Base ** Power
+            if Result >= N:
+                Tmp = Result - N
+                NumList.append(Tmp)
+            elif Result >= 0:
+                NumList.append(Result)
+            elif DecimalNum < 0:
+                NumList.append(0)
+            Power -= 1
+        for i in range(len(NumList)):
+            if NumList[i] >= 10:
+                LetterNum = NumList[i] + 55
+                NumList[i] = chr(LetterNum)
+            VoidNum += str(NumList[i])
+        print("Result: ", VoidNum)
 
 DecimalTurnIntoOtherSystem()  
  
