@@ -31,36 +31,32 @@ def DecimalTurnIntoOtherSystem():
     NumList =[]
     VoidNum = ''
     DecimalNum = GetDecimalNum()
-    Remainder  = DecimalNum
-    while Remainder >= N:
-        if N > 10:
-            Quotient = Remainder // N
-        else:
-            Quotient = Remainder % N
-        if Quotient < 10:
-            NumList.append(Quotient)
-        elif Quotient >= 10:
-            LetterNum = Quotient % 10 + 65
-            Letter = chr(LetterNum)
-            NumList.append(Letter)
-        if N > 10:
-            Remainder = Remainder % N
-        else:
-            Remainder = Remainder // N
-        
-    if Remainder >= 10:
-        LetterNum = Remainder % 10 + 65
-        Letter = chr(LetterNum)
-        NumList.append(Letter)
-    elif Remainder > 0:
-        NumList.append(Remainder)
-    else:        
-        NumList.append(0)
-    if N <= 10:
-        NumList.reverse()
-    for i in NumList:
-        VoidNum += str(i)
-    print("Result is: ", VoidNum)
+    Base = N
+    Power = 0
+    Temp = Base ** Power
+    while DecimalNum > Temp:
+        Power += 1
+        Temp = Base ** Power
+        if DecimalNum == Temp:
+            Power += 1
+    Power -= 1
+    while Power != -1:
+        Result = DecimalNum // (Base ** Power)
+        DecimalNum -= Base ** Power
+        if Result >= N:
+            Tmp = Result - N
+            NumList.append(Tmp)
+        elif Result >= 0:
+            NumList.append(Result)
+        elif DecimalNum < 0:
+            NumList.append(0)
+        Power -= 1
+    for i in range(len(NumList)):
+        if NumList[i] >= 10:
+            LetterNum = NumList[i] + 55
+            NumList[i] = chr(LetterNum)
+        VoidNum += str(NumList[i])
+    print("Result: ", VoidNum)
 
-DecimalTurnIntoOtherSystem()
-
+DecimalTurnIntoOtherSystem()  
+ 
